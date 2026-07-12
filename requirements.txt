@@ -1,0 +1,11 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+jupyter
+ipykernel
+kaggle
+transformers>=4.30
+torch
+pandas
