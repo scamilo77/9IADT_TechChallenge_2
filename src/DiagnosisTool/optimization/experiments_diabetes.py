@@ -18,7 +18,15 @@ def interpretar_resultados(label, best_fitness):
         f"Contexto: {label}.\n"
         f"Gere uma explicação clara, prática e sem termos técnicos excessivos."
     )
-    resposta = summarizer(prompt, max_length=80, min_length=30)[0]["generated_text"]
+    resposta = summarizer(
+        prompt,
+        max_length=80,
+        min_length=30,
+        num_return_sequences=1,
+        do_sample=True,
+        top_k=50,
+        top_p=0.95
+    )[0]["generated_text"]
     return resposta.strip()
 
 def purge_results(prefix):
