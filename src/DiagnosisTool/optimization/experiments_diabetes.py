@@ -9,7 +9,7 @@ RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
 # Usando T5 para sumarização
-summarizer = pipeline("summarization", model="t5-small")
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
 def interpretar_resultados(label, best_fitness):
     prompt = (
