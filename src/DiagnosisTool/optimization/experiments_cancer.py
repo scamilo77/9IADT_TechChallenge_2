@@ -8,7 +8,7 @@ from transformers import pipeline
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
-summarizer = pipeline("text-generation", model="facebook/bart-large-cnn")
+summarizer = pipeline("summarization", model="t5-small")
 
 def interpretar_resultados(label, best_fitness):
     prompt = (
@@ -17,7 +17,7 @@ def interpretar_resultados(label, best_fitness):
         f"Contexto: {label}.\n"
         f"Gere uma explicação clara, prática e sem termos técnicos excessivos."
     )
-    resposta = summarizer(prompt, max_length=150, do_sample=False)[0]["generated_text"]
+    resposta = summarizer(prompt, max_length=150, min_length=30, do_sample=False)[0]["summary_text"]
     return resposta.strip()
 
 def purge_results(prefix):
