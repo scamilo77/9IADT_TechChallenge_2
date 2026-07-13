@@ -1,12 +1,22 @@
 numpy
-pandas
-scikit-learn
-matplotlib
 seaborn
 jupyter
 ipykernel
 kaggle
-transformers==4.41.2 
-tokenizers==0.19.1
 torch
-huggingface-hub==1.2.0
+
+# Bibliotecas principais
+matplotlib
+scikit-learn
+pandas
+
+# Hugging Face stack (versões compatíveis entre si e com Python 3.12)
+transformers==4.41.2
+tokenizers==0.19.1
+huggingface-hub==0.23.4
+
+# Gradio ajustado para não conflitar com huggingface-hub
+gradio==4.39.0
+
+# PyTorch (deixe sem versão fixa para o Colab puxar a roda correta)
+torch
