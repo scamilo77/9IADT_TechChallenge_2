@@ -8,8 +8,8 @@ from transformers import pipeline
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
-# Usando T5 para sumarização
-summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+# FLAN-T5 com text-generation
+summarizer = pipeline("text-generation", model="google/flan-t5-small")
 
 def interpretar_resultados(label, best_fitness):
     prompt = (
@@ -18,7 +18,14 @@ def interpretar_resultados(label, best_fitness):
         f"Contexto: {label}.\n"
         f"Gere uma explicação clara, prática e sem termos técnicos excessivos."
     )
-    resposta = summarizer(prompt, max_length=150, min_length=30, do_sample=False)[0]["summary_text"]
+    resposta = summarizer(
+        prompt,
+        max_length=150,
+        do_sample=True,
+        top_k=50,
+        top_p=0.95,
+        repetition_penalty=2.0
+    )[0]["generated_text"]
     return resposta.strip()
 
 def purge_results(prefix):
