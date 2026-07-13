@@ -6,6 +6,6 @@ seaborn
 jupyter
 ipykernel
 kaggle
-transformers>=4.30
+transformers>=4.30.2
 torch
 pandas
