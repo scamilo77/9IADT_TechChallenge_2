@@ -8,7 +8,7 @@ from transformers import pipeline
 RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
-summarizer = pipeline("summarization", model="t5-small")
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
 def interpretar_resultados(label, best_fitness):
     prompt = (
@@ -19,6 +19,7 @@ def interpretar_resultados(label, best_fitness):
     )
     resposta = summarizer(prompt, max_length=150, min_length=30, do_sample=False)[0]["summary_text"]
     return resposta.strip()
+
 
 def purge_results(prefix):
     for fname in os.listdir(RESULTS_DIR):
