@@ -12,22 +12,15 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 summarizer = pipeline("text2text-generation", model="google/flan-t5-base")
 
 def interpretar_resultados(label, best_fitness):
-    prompt = (
-        f"Explique este resultado para um médico:\n"
-        f"- Fitness: {best_fitness:.4f}\n"
-        f"Contexto: {label}.\n"
-        f"Gere uma explicação clara, prática e sem termos técnicos excessivos."
-    )
+    prompt = f"Explique para um médico o significado de um fitness de {best_fitness:.4f} no contexto de {label}."
     resposta = summarizer(
         prompt,
         max_length=80,
         min_length=30,
-        num_return_sequences=1,
-        do_sample=True,
-        top_k=50,
-        top_p=0.95
+        truncation=True
     )[0]["generated_text"]
     return resposta.strip()
+
 
 def purge_results(prefix):
     for fname in os.listdir(RESULTS_DIR):
