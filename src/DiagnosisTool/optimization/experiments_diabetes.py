@@ -15,7 +15,7 @@ def interpretar_resultados(label, best_fitness):
     prompt = f"Explique para um médico o significado de um fitness de {best_fitness:.4f} no contexto de {label}."
     resposta = summarizer(
         prompt,
-        max_length=80,
+        max_length=33,
         min_length=30,
         truncation=True
     )[0]["generated_text"]
